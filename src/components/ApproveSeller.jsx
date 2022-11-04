@@ -12,10 +12,16 @@ function ApproveSeller() {
     .catch(err=>console.log("err",err))
   }
   function approveSeller(GSTIN){
-    fetch(`http://localhost:4000/approveSeller/${GSTIN}`)
+    var token = window.localStorage.getItem('token')
+    fetch(`http://localhost:4000/approveSeller/${GSTIN}/${token}`)
     .then(res=>res.json())
     .then(data=>{
-      getSellers();
+      if(data.message==='notauthorised'){
+        alert("You are not authorised.....")
+      }
+      else{
+        getSellers();
+      }
     })
     .catch((err)=>{console.log("err::",err)})
   }
