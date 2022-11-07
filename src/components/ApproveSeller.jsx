@@ -12,7 +12,8 @@ function ApproveSeller() {
     .catch(err=>console.log("err",err))
   }
   function approveSeller(GSTIN){
-    fetch(`http://localhost:4000/approveSeller/${GSTIN}`)
+    var token = window.localStorage.getItem('token')
+    fetch(`http://localhost:4000/approveSeller/${GSTIN}/${token}`)
     .then(res=>res.json())
     .then(data=>{
       getSellers();
